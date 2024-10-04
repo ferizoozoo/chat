@@ -1,0 +1,22 @@
+.message-box {
+  border-radius: 28px;
+  max-width: 40%;
+  padding: 10px 15px;
+  clear: both;
+  text-align: start;
+}
+
+.message-left {
+  align-self: flex-start;
+  background-color: #6a3318;
+  margin-right: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message-right {
+  align-self: flex-end;
+  color: white;
+  background-color: #19497c;
+  margin-left: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
