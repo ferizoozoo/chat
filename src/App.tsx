@@ -1,33 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
+import { getMessages } from './mock';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [messages, setMessages] = useState<{ text: String, isUser: boolean }[]>();
+  const [message, setMessage] = useState<String>("");
+
+  const messagesEndRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (message.trim() !== '') {
+      setMessages(messages => [...messages, { text: message, isUser: true }])
+      setMessage('');
+    }
+  };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    setMessages(getMessages());
+  }, [])
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <div className='header'>
+          <h1>Welcome to this chat!</h1>
+        </div>
+        <div className='chatbox'>
+          <div className='chat-show'>
+            {messages?.map(message => (
+                <div className={`message-box ${message.isUser ? 'message-right' : 'message-left'}`}>
+                {message.text}
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <div className='chat-write'>
+            <form onSubmit={handleSubmit}>
+              <input className="send-message-input"
+                type="text"
+                placeholder="Type your message..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <button className='send-message-submit' type='submit'>+</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
