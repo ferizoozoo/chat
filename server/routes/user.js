@@ -1,20 +1,15 @@
 import express from 'express';
-import User from '../models/user.js';
+import { addUser, getUser } from '../services/user.js';
 var router = express.Router();
 
-/* GET home page. */
 router.post('/', async function(req, res, next) {
-    const user = new User({
-        ip: req.ip.toString(),
-        username: req.body.username
-    });
-    await user.save()
+    const user = addUser(req.body);
     res.send(user);
 });
 
 router.get('/', async function(req, res, next) {
-    const users = await User.find({ ip: req.ip.toString() });
-    res.send(users)
+    const user = await getUser(req.ip.toString(), req.body.username);
+    res.send(user);
 });
 
 export default router;
