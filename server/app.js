@@ -1,14 +1,16 @@
 import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import logger from 'morgan'
+import logger from 'morgan';
 
-import indexRouter from './routes/index.js'
-import userRouter from './routes/user.js'
+import indexRouter from './routes/index.js';
+import userRouter from './routes/user.js';
+import messageRouter from './routes/message.js';
+import roomRouter from './routes/room.js';
 import { dbConfig } from './db.js';
 
 var app = express();
-dbConfig()
+dbConfig();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -17,6 +19,8 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
+app.use('/messages', messageRouter);
+app.use('/rooms', roomRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
