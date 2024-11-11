@@ -24,12 +24,12 @@ router.post('/', async function(req, res, next) {
  * @route GET /
  * @group User - Operations related to users
  * @param {string} req.ip - The IP address of the client
- * @param {string} req.body.username - The username of the user to retrieve
+ * @param {string} req.params.username - The username of the user to retrieve
  * @returns {Object} 200 - The retrieved user object
  * @returns {Error} 404 - User not found
  */
-router.get('/', async function(req, res, next) {
-    const user = await getUser(req.ip.toString(), req.body.username);
+router.get('/:username', async function(req, res, next) {
+    const user = await getUser(req.ip.toString(), req.params.username);
     res.send(user);
 });
 

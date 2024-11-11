@@ -6,7 +6,7 @@ var router = express.Router();
  * Retrieves message.
  *
  * @route GET /:messageId
- * @group Room - Operations related to messages
+ * @group Message - Operations related to messages
  * @param {string} req.params.messageId - The Message ID
  * @returns {Object} 200 - The retrieved message
  * @returns {Error} 404 - Message not found
@@ -20,7 +20,7 @@ router.get('/:messageId', async function(req, res, next) {
  * Add a message to the specified room.
  *
  * @route GET /:roomId
- * @group Room - Operations related to messages
+ * @group Message - Operations related to messages
  * @param {string} req.body.userId - The sender ID
  * @param {string} req.body.text - The text sent by the sender
  * @param {string} req.params.roomId - The room ID
