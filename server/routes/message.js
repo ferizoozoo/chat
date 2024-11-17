@@ -27,7 +27,7 @@ router.get('/:messageId', async function(req, res, next) {
  * @returns {Object} 200 - Operation successful
  */
 router.post('/:roomId', async function(req, res, next) {
-    const [ userId, text ] = req.body;
+    const { userId, text } = req.body;
     const roomId = req.params.roomId;
     await addMessage(userId, text, roomId);
 });

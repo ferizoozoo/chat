@@ -1,14 +1,18 @@
 import { SERVER_URL } from "./base";
 
-const ROOM_ROUTE = SERVER_URL + 'room/'
+const ROOM_ROUTE = SERVER_URL + 'messages/'
 
 export async function addMessageToRoom(roomId: String, userId: String, message: String) {
     return await fetch(ROOM_ROUTE + roomId, {
         method: 'POST',
-        body: {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
             userId,
-            text: message
-        } 
+            text: message,
+        }) 
     })
 }
 

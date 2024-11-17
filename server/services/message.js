@@ -1,7 +1,6 @@
 import Message from "../models/message.js";
 
-export async function addMessage(msg) {
-    const [ sender, text, room ] = msg;
+export async function addMessage(sender, text, room) {
     const message = new Message({
         sender,
         text,

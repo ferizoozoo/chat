@@ -1,6 +1,6 @@
 import { SERVER_URL } from "./base";
 
-const USER_ROUTE = SERVER_URL + 'user/'
+const USER_ROUTE = SERVER_URL + 'users/'
 
 export async function addUser(username: String, email: String) {
     return await fetch(USER_ROUTE, {

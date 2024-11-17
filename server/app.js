@@ -1,7 +1,9 @@
 import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
+import cors from 'cors'
 
 import indexRouter from './routes/index.js';
 import userRouter from './routes/user.js';
@@ -12,6 +14,9 @@ import { dbConfig } from './db.js';
 var app = express();
 dbConfig();
 
+app.use(cors())
+
+app.use(bodyParser.json())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
