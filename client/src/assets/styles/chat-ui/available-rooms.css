@@ -1,0 +1,32 @@
+.available-rooms {
+    width: 20%;
+    border-right: 1px solid white;
+}
+
+ul {
+    overflow: auto;
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+li {
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    align-self: center;
+}
+
+li:hover {
+    background-color: rgba(128, 128, 128, 0.344);
+    cursor: pointer;
+}
+
+.room {
+    height: 100%;
+}
+
+.room-name-box {
+    color: gray;
+}

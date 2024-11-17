@@ -1,0 +1,18 @@
+.chatbox {
+  width: 80% 
+}
+
+.chat-show {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: auto;
+  /* padding: 20px; */
+  flex: 1;
+}
+
+.chat-write {
+  border-top: 2px solid white;
+  padding: 10px;
+}

@@ -1,22 +1,6 @@
-.chatbox {
-  border: 2px solid white;
-  border-radius: 10px;
-  width: 50vw;
-  height: 60%;
-}
-
-.chat-show {
-  height: 450px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  overflow: auto;
-  padding: 20px;
-  flex: 1;
-}
-
-.chat-write {
-  height: 50px;
-  border-top: 2px solid white;
-  padding: 10px;
+.layout {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
