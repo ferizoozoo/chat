@@ -1,5 +1,5 @@
 import express from 'express';
-import { createRoom, getRoomMessages } from '../services/room.js';
+import { createRoom, getRoomMessages, getAvailableRooms, getUserRooms } from '../services/room.js';
 var router = express.Router();
 
 /**
@@ -13,6 +13,33 @@ var router = express.Router();
  */
 router.get('/:roomId', async function(req, res, next) {
     const messages = await getRoomMessages(req.params.roomId);
+    res.send(messages);
+});
+
+/**
+ * Retrieves rooms of a user.
+ *
+ * @route GET /:userId
+ * @group Room - Operations related to rooms
+ * @param {string} req.params.userId- The User ID
+ * @returns {Object} 200 - The retrieved rooms of a user 
+ * @returns {Error} 404 - Rooms not found
+ */
+router.get('/:userId', async function(req, res, next) {
+    const messages = await getUserRooms(req.params.userId);
+    res.send(messages);
+});
+
+/**
+ * Retrieves available rooms.
+ *
+ * @route GET /
+ * @group Room - Operations related to rooms
+ * @returns {Object} 200 - The retrieved available rooms 
+ * @returns {Error} 404 - Rooms not found
+ */
+router.get('/', async function(req, res, next) {
+    const messages = await getAvailableRooms();
     res.send(messages);
 });
 
