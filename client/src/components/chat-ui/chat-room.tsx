@@ -11,7 +11,7 @@ function ChatRoom({ roomId }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const [messages, setMessages] = useState<object[]>();
 
-  const userId = user?._id;
+  const userId = JSON.parse(user)?.id;
 
   const messagesEndRef = useRef(null);
 

@@ -9,6 +9,7 @@ export async function addUser(u) {
     });
     await user.save();
     return {
+        id: user._id,
         username: user.username,
         email: user.email
     };
