@@ -1,14 +1,16 @@
 import "../../assets/styles/common/modal.css";
 
-const Modal = ({ children, onClose, isOpen }) => {
+const Modal = ({ children, onClose, isOpen, hasCloseButton }) => {
   if (isOpen)
     return (
       <div className="overlay">
         <div className="content">
           <div className="close-button-container">
-            <span onClick={onClose} className="close-button">
-              &times;
-            </span>
+            {hasCloseButton ? (
+              <span onClick={onClose} className="close-button">
+                &times;
+              </span>
+            ) : null}
           </div>
 
           {children}
