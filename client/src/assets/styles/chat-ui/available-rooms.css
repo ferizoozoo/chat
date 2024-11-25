@@ -29,4 +29,8 @@ li:hover {
 
 .room-name-box {
     color: gray;
+    height: 100%;
+    float: left;
+    padding: 0 16px;
+    align-content: center;
 }

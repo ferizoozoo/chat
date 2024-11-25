@@ -9,6 +9,12 @@ function AvailableRooms({
   handleSelectRoom: (selectedRoomId: string) => void;
 }) {
   const [rooms, setRooms] = useState();
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+
+  const handleSelect = (roomId: string, index: number) => {
+    handleSelectRoom(roomId);
+    setSelectedIndex(index);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -24,10 +30,20 @@ function AvailableRooms({
       <ul>
         {rooms &&
           rooms.map((room, index) => (
-            <li key={index} onClick={() => handleSelectRoom(room._id)}>
+            <li
+              key={index}
+              style={{
+                background:
+                  selectedIndex == index ? "rgba(128, 128, 128, 0.344)" : "",
+              }}
+              onClick={() => handleSelect(room._id, index)}
+            >
               <div className="room">
-                <div className="room-name-box">
-                  <p>{room.title}</p>
+                <div
+                  className="room-name-box"
+                  style={{ color: selectedIndex == index ? "#e1cccc" : "" }}
+                >
+                  <span>{room.title}</span>
                 </div>
               </div>
             </li>
