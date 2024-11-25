@@ -5,10 +5,13 @@ import ChatForm from "./chat-form";
 import { getRoomMessages } from "../../apis/room";
 import { addMessageToRoom } from "../../apis/message";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { LocalStorageConsts } from "../../shared/constants";
 
 function ChatRoom({ roomId }) {
-  const [userId, _] = useLocalStorage("userId");
+  const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const [messages, setMessages] = useState<object[]>();
+
+  const userId = user?._id;
 
   const messagesEndRef = useRef(null);
 

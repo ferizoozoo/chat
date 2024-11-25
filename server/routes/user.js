@@ -14,7 +14,7 @@ var router = express.Router();
  * @returns {Error}  default - Unexpected error
  */
 router.post('/', async function(req, res, next) {
-    const user = addUser(req.body);
+    const user = await addUser({ ...req.body, ip: req.ip });
     res.send(user);
 });
 

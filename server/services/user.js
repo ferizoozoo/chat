@@ -1,13 +1,17 @@
 import User from "../models/user.js";
 
 export async function addUser(u) {
-    const [ ip, username ] = u;
+    const { ip, username, email } = u;
     const user = new User({
         ip,
-        username
+        username,
+        email
     });
     await user.save();
-    return user;
+    return {
+        username: user.username,
+        email: user.email
+    };
 }
 
 export async function getUser(ip, username) {
