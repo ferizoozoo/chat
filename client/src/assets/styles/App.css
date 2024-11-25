@@ -4,3 +4,30 @@
   /* margin: 0 auto; */
   text-align: center;
 }
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.modal-label {
+  color: black;
+}
+
+.modal-form-input {
+  border-radius: 5px;
+  border: 2px solid rgb(57, 55, 55);
+  font-size: medium;
+  padding: 2px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.modal-form-button {
+  padding: 4px 5px;
+  width: fit-content;
+  margin: auto;
+  cursor: pointer;
+}

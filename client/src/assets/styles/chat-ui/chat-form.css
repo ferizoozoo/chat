@@ -1,4 +1,4 @@
-form {
+.form {
   display: flex;
   align-items: center;
   width: 100%;
@@ -24,8 +24,8 @@ form {
 .send-message-submit {
   height: 40px;
   padding: 0 20px;
-  background-color: #007bff;
   color: white;
+  background-color: #007bff;
   border: none;
   border-radius: 20px;
   cursor: pointer;
