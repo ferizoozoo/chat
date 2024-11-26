@@ -1,0 +1,16 @@
+.user {
+    border-top: 1px solid gray;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.username {
+    font-size: medium;
+}
+
+.logout-button {
+    border: none;
+    float: right;
+}

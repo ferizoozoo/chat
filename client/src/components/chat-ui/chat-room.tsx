@@ -15,7 +15,7 @@ function ChatRoom({ roomId }) {
 
   const messagesEndRef = useRef(null);
 
-  const handleSubmit = async (message: String) => {
+  const handleSubmit = async (message: String, userId: String) => {
     if (message.trim() !== "") {
       setMessages((messages) => [
         ...messages,
@@ -51,7 +51,7 @@ function ChatRoom({ roomId }) {
         <div ref={messagesEndRef} />
       </div>
       <div className="chat-write">
-        <ChatForm handleSubmit={handleSubmit} />
+        <ChatForm handleSubmit={handleSubmit} userId={userId} />
       </div>
     </div>
   );

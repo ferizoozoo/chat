@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { getAvailableRooms } from "../../apis/room";
 
 import "../../assets/styles/chat-ui/available-rooms.css";
+import UserSection from "./user-section";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { LocalStorageConsts } from "../../shared/constants";
 
 function AvailableRooms({
   handleSelectRoom,
 }: {
   handleSelectRoom: (selectedRoomId: string) => void;
 }) {
+  const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const [rooms, setRooms] = useState();
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
@@ -23,6 +27,10 @@ function AvailableRooms({
       setRooms(result);
     }
     fetchData();
+
+    return () => {
+      setSelectedIndex(-1);
+    };
   }, []);
 
   return (
@@ -49,6 +57,7 @@ function AvailableRooms({
             </li>
           ))}
       </ul>
+      <UserSection />
     </div>
   );
 }

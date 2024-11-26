@@ -1,14 +1,14 @@
 import { useState } from "react";
 import "../../assets/styles/chat-ui/chat-form.css";
 
-function ChatForm({ handleSubmit }) {
+function ChatForm({ handleSubmit, userId }) {
   const [message, setMessage] = useState<String>("");
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (message.trim() != "") {
-      handleSubmit(message);
+      handleSubmit(message, userId);
       setMessage("");
     }
   };

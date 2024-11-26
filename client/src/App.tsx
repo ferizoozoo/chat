@@ -26,7 +26,9 @@ function App() {
   useEffect(() => {
     if (storedUser) {
       setIsOpen(false);
+      return;
     }
+    setIsOpen(true);
   }, [storedUser]);
 
   return (
