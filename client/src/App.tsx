@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./assets/styles/App.css";
-import Chat from "./components/chat-ui/chat";
+import Chat from "./components/ui/chat";
 import Modal from "./components/common/modal";
 import { addUser } from "./apis/user";
 import useLocalStorage from "./hooks/useLocalStorage";
