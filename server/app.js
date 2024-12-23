@@ -10,8 +10,14 @@ import userRouter from './routes/user.js';
 import messageRouter from './routes/message.js';
 import roomRouter from './routes/room.js';
 import { dbConfig } from './db.js';
+import { SocketServer } from './socket.js';
 
 var app = express();
+const server = http.createServer(app) 
+
+const socketServer = new SocketServer(server);
+socketServer.start();
+
 dbConfig();
 
 app.use(cors())
