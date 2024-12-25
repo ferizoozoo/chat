@@ -5,22 +5,26 @@ import ChatForm from "./chat-form";
 import { getRoomMessages } from "../../apis/room";
 import { addMessageToRoom } from "../../apis/message";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { LocalStorageConsts } from "../../shared/constants";
+import { LocalStorageConsts, SocketConsts } from "../../shared/constants";
+import useSocket from "../../hooks/useSocket";
+import { safeJsonParse } from "../../shared/safeJsonParse";
 
 function ChatRoom({ roomId }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
+  const { emit: sendMessage } = useSocket(SocketConsts.SEND_MESSAGE, (data) => {
+    setMessages((messages) => [...messages, data]);
+  });
   const [messages, setMessages] = useState<object[]>();
 
-  const userId = JSON.parse(user)?.id;
+  const userId = safeJsonParse(user)?.id;
 
   const messagesEndRef = useRef(null);
 
   const handleSubmit = async (message: String, userId: String) => {
     if (message.trim() !== "") {
-      setMessages((messages) => [
-        ...messages,
-        { text: message, sender: userId },
-      ]);
+      const messageObj = { text: message, sender: userId };
+      sendMessage(SocketConsts.SEND_MESSAGE, messageObj);
+      setMessages((messages) => [...messages, messageObj]);
       await addMessageToRoom(roomId, userId, message);
     }
   };
