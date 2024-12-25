@@ -1,21 +1,27 @@
-const { Server } = require("socket.io");
+import { getHandlers } from "./events/socket/index.js";
+
+import { Server } from 'socket.io'
 
 export class SocketServer {
-    #listeners = [];
-
     constructor(server) {
-        this.io = new Server(server)
+        this.io = new Server(server, {
+            cors: {
+                origin: "*", 
+                methods: ["GET", "POST"],
+            },
+        })
     }
 
     start() {
         this.io.on('connection', socket => {
-            this.#listeners.forEach(({ event, handler }) => {
-                socket.on(event, handler)
-            })
+            this.#registerListeners(socket);
         });    
     }
 
-    registerListener({ event, handler }) {
-        this.#listeners.push({ event, handler })
+    #registerListeners(socket) {
+        const listeners = getHandlers(socket, this.io);
+        listeners.forEach(listener => {
+            this.io.on(listener.event, listener.handler);
+        })
     }
 }
