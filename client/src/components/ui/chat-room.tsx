@@ -11,8 +11,8 @@ import { safeJsonParse } from "../../shared/safeJsonParse";
 
 function ChatRoom({ roomId }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
-  const { emit: sendMessage } = useSocket(SocketConsts.SEND_MESSAGE, (data) => {
-    setMessages((messages) => [...messages, data]);
+  const { emit } = useSocket(SocketConsts.GET_MESSAGE, (data) => {
+    console.log(data);
   });
   const [messages, setMessages] = useState<object[]>();
 
@@ -23,7 +23,10 @@ function ChatRoom({ roomId }) {
   const handleSubmit = async (message: String, userId: String) => {
     if (message.trim() !== "") {
       const messageObj = { text: message, sender: userId };
-      sendMessage(SocketConsts.SEND_MESSAGE, messageObj);
+      emit(SocketConsts.SEND_MESSAGE, {
+        room: roomId,
+        message: messageObj,
+      });
       setMessages((messages) => [...messages, messageObj]);
       await addMessageToRoom(roomId, userId, message);
     }

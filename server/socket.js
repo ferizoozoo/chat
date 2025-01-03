@@ -14,14 +14,20 @@ export class SocketServer {
 
     start() {
         this.io.on('connection', socket => {
-            this.#registerListeners(socket);
+            console.log('connection made!')
+            
+            this.#registerListeners(socket, this.io);
+
+            socket.on('disconnect', () => {
+                console.log(`user ${socket.id} disconnected`)
+            })
         });    
     }
 
-    #registerListeners(socket) {
-        const listeners = getHandlers(socket, this.io);
+    #registerListeners(socket, io) {
+        const listeners = getHandlers(socket, io);
         listeners.forEach(listener => {
-            this.io.on(listener.event, listener.handler);
+            socket.on(listener.event, listener.handler);
         })
     }
 }

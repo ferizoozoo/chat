@@ -1,17 +1,27 @@
-import { useEffect } from "react";
-import socket from "../socket";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
 
 const useSocket = <T = any>(event: string, callback: (data: T) => void) => {
+  const [socket, setSocket] = useState<Socket | undefined>();
+
   useEffect(() => {
-    socket.on(event, callback);
+    const newSocket = io(import.meta.env.VITE_SOCKET_URL, {
+      transports: ["polling", "websocket"],
+      reconnectionAttempts: 5,
+      timeout: 10000,
+    });
+
+    newSocket.on(event, callback);
+    setSocket(newSocket);
 
     return () => {
-      socket.off(event, callback);
+      newSocket.off(event, callback);
+      newSocket.disconnect();
     };
-  }, [event, callback]);
+  }, [event]);
 
   const emit = (event: string, data: any) => {
-    socket.emit(event, data);
+    socket!.emit(event, data);
   };
 
   return { emit };
