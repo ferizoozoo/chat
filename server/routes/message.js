@@ -30,6 +30,7 @@ router.post('/:roomId', async function(req, res, next) {
     const { userId, text } = req.body;
     const roomId = req.params.roomId;
     await addMessage(userId, text, roomId);
+    res.sendStatus(200)
 });
 
 export default router;
