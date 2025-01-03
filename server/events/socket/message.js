@@ -4,7 +4,14 @@ export const messageEvents = (socket, io) => [
     {
         event: EventsConsts.SEND_MESSAGE,
         handler: (data) => {
-            socket.emit(EventsConsts.SEND_MESSAGE, data)
+            console.log(data)
+            io.emit(EventsConsts.GET_MESSAGE, data)
+        },
+    },
+    {
+        event: EventsConsts.GET_MESSAGE,
+        handler: (data) => {
+            // socket.emit(EventsConsts.GET_MESSAGE, data)
         }
     }
 ]
