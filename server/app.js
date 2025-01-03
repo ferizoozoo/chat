@@ -12,9 +12,12 @@ import messageRouter from './routes/message.js';
 import roomRouter from './routes/room.js';
 import { dbConfig } from './db.js';
 import { SocketServer } from './socket.js';
+import { configDotenv } from 'dotenv';
+
+configDotenv();
 
 var app = express();
-const server = http.createServer(app) 
+const server = http.createServer(app); 
 
 const socketServer = new SocketServer(server);
 socketServer.start();
@@ -46,13 +49,12 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  res.status(err.status || 500).json({ error: err.message });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 

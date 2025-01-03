@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export function dbConfig() {
-  mongoose.connect('mongodb://127.0.0.1:27017/chat')
+  mongoose.connect(process.env.DATABASE_URL)
     .then(
       (value) => {
         console.log("database connected");
