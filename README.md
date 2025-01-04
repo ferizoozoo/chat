@@ -9,7 +9,7 @@ chat app written in JS and TS.
 - [x] connect the chat UI with the server
 - [x] add user by showing a modal requiring a username at the beginning
 - [x] add a logout button
-- [ ] add websocket for real-time messaging
+- [x] add websocket for real-time messaging
 - [ ] add a button for showing online users to select in order to create a room
 - [ ] show only users rooms on the left pane
 - [ ] add cache to improve speed
