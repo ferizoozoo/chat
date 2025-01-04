@@ -4,7 +4,6 @@ export const messageEvents = (socket, io) => [
     {
         event: EventsConsts.SEND_MESSAGE,
         handler: (data) => {
-            console.log(data)
             io.emit(EventsConsts.GET_MESSAGE, data)
         },
     },

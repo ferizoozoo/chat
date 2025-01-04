@@ -12,9 +12,10 @@ import { safeJsonParse } from "../../shared/safeJsonParse";
 function ChatRoom({ roomId }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const { emit } = useSocket(SocketConsts.GET_MESSAGE, (data) => {
-    console.log(data);
+    setNewMessage(data);
   });
-  const [messages, setMessages] = useState<object[]>();
+  const [messages, setMessages] = useState<(object | undefined)[]>();
+  const [newMessage, setNewMessage] = useState<object>();
 
   const userId = safeJsonParse(user)?.id;
 
@@ -22,12 +23,8 @@ function ChatRoom({ roomId }) {
 
   const handleSubmit = async (message: String, userId: String) => {
     if (message.trim() !== "") {
-      const messageObj = { text: message, sender: userId };
-      emit(SocketConsts.SEND_MESSAGE, {
-        room: roomId,
-        message: messageObj,
-      });
-      setMessages((messages) => [...messages, messageObj]);
+      const messageObj = { text: message, sender: userId, room: roomId };
+      emit(SocketConsts.SEND_MESSAGE, messageObj);
       await addMessageToRoom(roomId, userId, message);
     }
   };
@@ -50,6 +47,14 @@ function ChatRoom({ roomId }) {
     }
     fetchData(roomId);
   }, [roomId]);
+
+  useEffect(() => {
+    if (newMessage === undefined) return;
+
+    if (messages?.length > 0)
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    else setMessages([newMessage]);
+  }, [newMessage]);
 
   return (
     <div className="chatbox">
