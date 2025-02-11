@@ -8,8 +8,10 @@ import { LocalStorageConsts } from "../../shared/constants";
 
 function AvailableRooms({
   handleSelectRoom,
+  handleOpenSelectUsers,
 }: {
   handleSelectRoom: (selectedRoomId: string) => void;
+  handleOpenSelectUsers: (selectedRoomId: string) => void;
 }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const [rooms, setRooms] = useState();
@@ -56,6 +58,9 @@ function AvailableRooms({
               </div>
             </li>
           ))}
+        <button className="create-room" onClick={handleOpenSelectUsers}>
+          +
+        </button>
       </ul>
       <UserSection />
     </div>

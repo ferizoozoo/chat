@@ -7,7 +7,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import { LocalStorageConsts } from "./shared/constants";
 
 function App() {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(true);
   const [storedUser, setStoredUser] = useLocalStorage(LocalStorageConsts.USER);
 
   const handleForm = async (e) => {
@@ -25,17 +25,17 @@ function App() {
 
   useEffect(() => {
     if (storedUser) {
-      setIsOpen(false);
+      setIsSignupModalOpen(false);
       return;
     }
-    setIsOpen(true);
+    setIsSignupModalOpen(true);
   }, [storedUser]);
 
   return (
     <>
       <Modal
-        onClose={() => setIsOpen(false)}
-        isOpen={isOpen}
+        onClose={() => setIsSignupModalOpen(false)}
+        isOpen={isSignupModalOpen}
         hasCloseButton={false}
       >
         <form className="modal-form" onSubmit={handleForm}>
@@ -46,6 +46,7 @@ function App() {
           <input className="modal-form-button" type="submit" />
         </form>
       </Modal>
+
       <Chat />
     </>
   );

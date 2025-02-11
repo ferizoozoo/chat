@@ -21,7 +21,7 @@ const useSocket = <T = any>(event: string, callback: (data: T) => void) => {
   }, [event]);
 
   const emit = (event: string, data: any) => {
-    socket!.emit(event, data);
+    if (socket) socket!.emit(event, data);
   };
 
   return { emit };
