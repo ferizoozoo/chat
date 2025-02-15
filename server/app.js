@@ -13,6 +13,7 @@ import roomRouter from './routes/room.js';
 import { dbConfig } from './db.js';
 import { SocketServer } from './socket.js';
 import { configDotenv } from 'dotenv';
+import { cacheConfig } from './shared/cache.js';
 
 configDotenv();
 
@@ -23,6 +24,7 @@ const socketServer = new SocketServer(server);
 socketServer.start();
 
 dbConfig();
+cacheConfig();
 
 app.use(cors())
 
