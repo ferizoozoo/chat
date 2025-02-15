@@ -5,8 +5,9 @@ export const userEvents = (socket, io) => [
     {
         event: EventsConsts.GET_ONLINE_USERS,
         handler: (data) => {
-            const connectedSockets = Array.from(io.sockets.sockets.keys());
-            io.emit(EventsConsts.SET_ONLINE_USERS, connectedSockets);
+            const connectedUsers = Array.from(Cache.getOrCreateInstance().getKeys());
+            console.log(connectedUsers)
+            io.emit(EventsConsts.SET_ONLINE_USERS, connectedUsers);
         },
     },
     {

@@ -33,6 +33,10 @@ class Cache {
     delete(key) {
         this.#cache.delete(key);
     }
+
+    getKeys() {
+        return Array.from(this.#cache.keys());
+    }
 }
 
 export function cacheConfig() {
