@@ -11,7 +11,7 @@ chat app written in JS and TS.
 - [x] add a logout button
 - [x] add websocket for real-time messaging
 - [x] add a button for showing online users to select in order to create a room
-- [ ] map the users id in database with their corresponding socket id (maybe using a cache or a simple object to store them)
+- [x] map the users id in database with their corresponding socket id (maybe using a cache or a simple object to store them)
 - [ ] show only users rooms on the left pane
 - [ ] add cache to improve speed
 
