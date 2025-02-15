@@ -11,4 +11,5 @@ export const SocketConsts = {
   CONNECTED: "connected",
   GET_ONLINE_USERS: "get-online-users",
   SET_ONLINE_USERS: "set-online-users",
+  ADD_USER: "add-user",
 };

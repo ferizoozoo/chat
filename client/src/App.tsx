@@ -4,11 +4,16 @@ import Chat from "./components/ui/chat";
 import Modal from "./components/common/modal";
 import { addUser } from "./apis/user";
 import useLocalStorage from "./hooks/useLocalStorage";
-import { LocalStorageConsts } from "./shared/constants";
+import { LocalStorageConsts, SocketConsts } from "./shared/constants";
+import useSocket from "./hooks/useSocket";
 
 function App() {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState<boolean>(true);
   const [storedUser, setStoredUser] = useLocalStorage(LocalStorageConsts.USER);
+
+  const { emit } = useSocket(SocketConsts.ADD_USER, (data) => {
+    console.log({ data });
+  });
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -19,6 +24,9 @@ function App() {
     const response = await addUser(data.username, data.email);
     if (response.status == 200) {
       const result = await response.json();
+      emit(SocketConsts.ADD_USER, {
+        userId: result.id,
+      });
       setStoredUser(JSON.stringify(result));
     }
   };
