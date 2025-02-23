@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import "../../assets/styles/chat-ui/chat-room.css";
 import ChatMessages from "./chat-messages";
 import ChatForm from "./chat-form";
-import { getRoomMessages } from "../../apis/room";
 import { addMessageToRoom } from "../../apis/message";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { LocalStorageConsts, SocketConsts } from "../../shared/constants";
 import useSocket from "../../hooks/useSocket";
 import { safeJsonParse } from "../../shared/safeJsonParse";
+import { getRoomMessages } from "../../apis/room";
 
 function ChatRoom({ roomId }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
@@ -39,7 +39,7 @@ function ChatRoom({ roomId }) {
 
   useEffect(() => {
     async function fetchData(roomId: String) {
-      if (roomId) {
+      if (roomId && typeof roomId !== "undefined") {
         const response = await getRoomMessages(roomId);
         const result = await response.json();
         setMessages(result);

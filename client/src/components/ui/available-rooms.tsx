@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import { getAvailableRooms } from "../../apis/room";
+import { getUserRooms } from "../../apis/room";
 
 import "../../assets/styles/chat-ui/available-rooms.css";
 import UserSection from "./user-section";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { LocalStorageConsts } from "../../shared/constants";
+import { safeJsonParse } from "../../shared/safeJsonParse";
 
 function AvailableRooms({
   handleSelectRoom,
   handleOpenSelectUsers,
+  isRoomCreated,
 }: {
   handleSelectRoom: (selectedRoomId: string) => void;
   handleOpenSelectUsers: (selectedRoomId: string) => void;
+  isRoomCreated: boolean;
 }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
-  const [rooms, setRooms] = useState();
+  const [rooms, setRooms] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+
+  const userId = safeJsonParse(user)?.id;
 
   const handleSelect = (roomId: string, index: number) => {
     handleSelectRoom(roomId);
@@ -24,7 +29,8 @@ function AvailableRooms({
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getAvailableRooms();
+      if (!user && !userId) return;
+      const response = await getUserRooms(userId);
       const result = await response.json();
       setRooms(result);
     }
@@ -33,7 +39,7 @@ function AvailableRooms({
     return () => {
       setSelectedIndex(-1);
     };
-  }, []);
+  }, [isRoomCreated]);
 
   return (
     <div className="available-rooms">

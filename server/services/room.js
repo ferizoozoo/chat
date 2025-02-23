@@ -13,8 +13,9 @@ export async function getUserRooms(userId) {
     return await Room.find({ members: userId });
 }
 
-export async function createRoom(members) {
+export async function createRoom(title, members) {
     const room = new Room({
+        title,
         members
     });
     await room.save();
