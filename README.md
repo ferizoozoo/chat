@@ -12,8 +12,10 @@ chat app written in JS and TS.
 - [x] add websocket for real-time messaging
 - [x] add a button for showing online users to select in order to create a room
 - [x] map the users id in database with their corresponding socket id (maybe using a cache or a simple object to store them)
-- [ ] show only users rooms on the left pane
-- [ ] add cache to improve speed
+- [x] show only users rooms on the left pane
+- [ ] test the whole system and find and fix bugs
+- [ ] refactor (like using stores for states instead of passing down states as props, rename unclear stuff, etc.)
+- [ ] tag the completed project with V1.0.0
 
 ## License
 
