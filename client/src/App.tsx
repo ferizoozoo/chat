@@ -46,11 +46,25 @@ function App() {
         isOpen={isSignupModalOpen}
         hasCloseButton={false}
       >
-        <form className="modal-form" onSubmit={handleForm}>
-          <label className="modal-label">Enter your username</label>
-          <input className="modal-form-input" type="text" name="username" />
-          <label className="modal-label">Enter your email</label>
-          <input className="modal-form-input" type="email" name="email" />
+        <form className="modal-form" id="user-form" onSubmit={handleForm}>
+          <label className="modal-label" htmlFor="username">
+            Enter your username
+          </label>
+          <input
+            className="modal-form-input"
+            type="text"
+            id="username"
+            name="username"
+          />
+          <label className="modal-label" htmlFor="email">
+            Enter your email
+          </label>
+          <input
+            className="modal-form-input"
+            type="email"
+            id="email"
+            name="email"
+          />
           <input className="modal-form-button" type="submit" />
         </form>
       </Modal>
