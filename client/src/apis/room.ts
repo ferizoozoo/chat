@@ -16,11 +16,11 @@ export async function createRoom(title: string, members: string[]) {
   });
 }
 
-export async function getRoomMessages(roomId: String) {
+export async function getRoomMessages(roomId: string) {
   return await fetch(ROOM_ROUTE + roomId);
 }
 
-export async function getUserRooms(userId: String) {
+export async function getUserRooms(userId: string) {
   return await fetch(ROOM_ROUTE + "user/" + userId);
 }
 

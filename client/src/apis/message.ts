@@ -2,7 +2,7 @@ import { SERVER_URL } from "./base";
 
 const ROOM_ROUTE = SERVER_URL + 'messages/'
 
-export async function addMessageToRoom(roomId: String, userId: String, message: String) {
+export async function addMessageToRoom(roomId: string, userId: string, message: string) {
     return await fetch(ROOM_ROUTE + roomId, {
         method: 'POST',
         headers: {
@@ -16,6 +16,6 @@ export async function addMessageToRoom(roomId: String, userId: String, message: 
     })
 }
 
-export async function getMessage(messageId: String) {
+export async function getMessage(messageId: string) {
     return await fetch(ROOM_ROUTE + messageId); 
 }

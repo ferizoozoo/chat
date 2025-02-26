@@ -21,7 +21,7 @@ function ChatRoom({ roomId }) {
 
   const messagesEndRef = useRef(null);
 
-  const handleSubmit = async (message: String, userId: String) => {
+  const handleSubmit = async (message: string, userId: string) => {
     if (message.trim() !== "") {
       const messageObj = { text: message, sender: userId, room: roomId };
       emit(SocketConsts.SEND_MESSAGE, messageObj);
@@ -30,7 +30,9 @@ function ChatRoom({ roomId }) {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function ChatRoom({ roomId }) {
   }, [messages]);
 
   useEffect(() => {
-    async function fetchData(roomId: String) {
+    async function fetchData(roomId: string) {
       if (roomId && typeof roomId !== "undefined") {
         const response = await getRoomMessages(roomId);
         const result = await response.json();
