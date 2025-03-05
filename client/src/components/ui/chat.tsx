@@ -51,8 +51,13 @@ function Chat() {
         hasCloseButton={false}
       >
         <form className="modal-form" onSubmit={handleCreateRoom}>
-          <label>Room title</label>
-          <input name="title" className="modal-form-input" type="text" />
+          <label htmlFor="room-title">Room title</label>
+          <input
+            name="title"
+            id="room-title"
+            className="modal-form-input"
+            type="text"
+          />
           <label className="modal-label">Select people to create a room</label>
           <select
             multiple
