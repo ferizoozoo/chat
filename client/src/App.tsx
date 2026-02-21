@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./assets/styles/App.css";
-import Chat from "./components/ui/chat";
+import Chat from "./components/ui/chat.tsx";
 import Modal from "./components/common/modal";
 import { addUser } from "./apis/user";
 import useLocalStorage from "./hooks/useLocalStorage";
@@ -15,13 +15,15 @@ function App() {
     console.log({ data });
   });
 
-  const handleForm = async (e) => {
+  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+    const username = String(formData.get("username") || "");
+    const email = String(formData.get("email") || "");
 
-    const response = await addUser(data.username, data.email);
+    const response = await addUser(username, email);
     if (response.status == 200) {
       const result = await response.json();
       emit(SocketConsts.ADD_USER, {

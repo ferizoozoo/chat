@@ -1,8 +1,39 @@
+.mobile-header {
+    display: none;
+}
+
+.available-rooms-wrapper {
+    flex: 0 0 20%;
+}
+
+.available-rooms-wrapper.hidden {
+    display: none;
+}
+
+.sidebar-toggle-button {
+    display: none;
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    z-index: 1100;
+}
+
+@media (min-width: 769px) {
+    .sidebar-toggle-button {
+        display: inline-flex;
+    }
+}
+
+.mobile-hamburger {
+    /* Uses default .hamburger-button styles from hamburger.css */
+}
+
 .layout {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .modal-form {
@@ -27,4 +58,45 @@
 
 .modal-form-selector {
     overflow: auto;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        background-color: #242424;
+        border-bottom: 1px solid gray;
+        padding: 0 15px;
+        position: relative;
+        z-index: 900;
+    }
+
+    /* Mobile hamburger inherits .hamburger-button styles from hamburger.css */
+
+    .sidebar-overlay {
+        display: block;
+    }
+
+    .available-rooms-wrapper {
+        flex: 0 0 auto;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100% - 60px);
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .available-rooms-wrapper.open {
+        transform: translateX(0);
+    }
+
+    .layout {
+        height: calc(100% - 60px);
+    }
 }

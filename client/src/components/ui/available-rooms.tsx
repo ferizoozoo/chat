@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserRooms } from "../../apis/room";
 
 import "../../assets/styles/chat-ui/available-rooms.css";
+import { HamburgerIcon } from "../../components/common/hamburger";
 import UserSection from "./user-section";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { LocalStorageConsts } from "../../shared/constants";
@@ -11,10 +12,16 @@ function AvailableRooms({
   handleSelectRoom,
   handleOpenSelectUsers,
   isRoomCreated,
+  onCloseSidebar,
+  visible = true,
+  onToggleVisibility,
 }: {
   handleSelectRoom: (selectedRoomId: string) => void;
   handleOpenSelectUsers: (selectedRoomId: string) => void;
   isRoomCreated: boolean;
+  onCloseSidebar?: () => void;
+  visible?: boolean;
+  onToggleVisibility?: () => void;
 }) {
   const [user, _] = useLocalStorage(LocalStorageConsts.USER);
   const [rooms, setRooms] = useState([]);
@@ -42,7 +49,14 @@ function AvailableRooms({
   }, [isRoomCreated]);
 
   return (
-    <div className="available-rooms">
+    <div className={`available-rooms ${visible ? "" : "hidden"}`}>
+      <div className="sidebar-header">
+        <HamburgerIcon
+          onClick={onToggleVisibility}
+          ariaLabel={visible ? "Hide sidebar" : "Show sidebar"}
+          className="sidebar-hamburger"
+        />
+      </div>
       <ul>
         {rooms &&
           rooms.map((room, index) => (

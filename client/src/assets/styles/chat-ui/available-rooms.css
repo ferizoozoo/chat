@@ -1,9 +1,40 @@
+.available-rooms-wrapper {
+    flex: 0 0 20%;
+}
+
 .available-rooms {
-    width: 20%;
+    width: 100%;
     border-right: 1px solid white;
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    height: 100%;
+}
+
+.available-rooms.hidden {
+    /* hidden state handled by wrapper; keep placeholder */
+}
+
+.sidebar-header {
+    display: flex;
+    height: 50px;
+    border-bottom: 1px solid gray;
+    padding: 0 10px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sidebar-header {
+    position: relative;
+}
+
+.sidebar-hamburger {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2200; /* ensure it's above overlays */
+    /* Inherits .hamburger-button styles from hamburger.css */
 }
 
 ul {
@@ -36,4 +67,45 @@ li:hover {
     float: left;
     padding: 0 10px;
     align-content: center;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .available-rooms-wrapper {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100% - 60px);
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .available-rooms-wrapper.open {
+        transform: translateX(0);
+    }
+
+    .available-rooms {
+        width: 100%;
+        border-right: 1px solid white;
+        height: 100%;
+    }
+
+    .sidebar-header {
+        display: flex;
+    }
+}
+
+/* Desktop collapsed sidebar */
+@media (min-width: 769px) {
+    .available-rooms-wrapper.hidden {
+        display: none;
+    }
+    .sidebar-hamburger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
