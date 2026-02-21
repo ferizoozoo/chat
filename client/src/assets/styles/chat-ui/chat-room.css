@@ -16,7 +16,6 @@
 }
 
 .chat-write {
-  border-top: 2px solid white;
   padding: 10px;
   height: 80px;
   display: flex;
